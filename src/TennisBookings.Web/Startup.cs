@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TennisBookings.Web.Configuration;
+using TennisBookings.Web.Controllers;
 using TennisBookings.Web.Services;
 
 namespace TennisBookings.Web
@@ -20,6 +21,9 @@ namespace TennisBookings.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+           // services.AddTransient<GuidService>();
+            services.AddScoped<GuidService>();
+           // services.AddSingleton<GuidService>();
             services.AddTransient<IWeatherForecaster, AmazingWeatherForecaster>();
             services.Configure<FeaturesConfiguration>(Configuration.GetSection("Features"));
 
@@ -30,6 +34,8 @@ namespace TennisBookings.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+           // app.UseMiddleware<Middleware.CustomMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -42,7 +48,7 @@ namespace TennisBookings.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseMvc();
         }
     }
