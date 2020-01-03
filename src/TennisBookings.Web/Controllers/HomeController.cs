@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 using TennisBookings.Web.Configuration;
 using TennisBookings.Web.Services;
 using TennisBookings.Web.ViewModels;
@@ -19,13 +20,13 @@ namespace TennisBookings.Web.Controllers
 
 
         [Route("")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var viewModel = new HomeViewModel();
 
             if (_featuresConfiguration.EnableWeatherForecast)
             {
-                var currentWeather = _weatherForcaster.GetCurrentWeather();
+                var currentWeather =await _weatherForcaster.GetCurrentWeatherAsync();
 
                 switch (currentWeather.WeatherCondition)
                 {

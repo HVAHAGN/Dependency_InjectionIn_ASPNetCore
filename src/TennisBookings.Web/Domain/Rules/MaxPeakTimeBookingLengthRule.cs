@@ -5,7 +5,7 @@ using TennisBookings.Web.Data;
 
 namespace TennisBookings.Web.Domain.Rules
 {
-    public class MaxPeakTimeBookingLengthRule : ISingletonCourtBookingRule
+    public class MaxPeakTimeBookingLengthRule : IScopedCourtBookingRule
     {
         private readonly IClubConfiguration _clubConfiguration;
         private readonly BookingConfiguration _bookingConfiguration;
